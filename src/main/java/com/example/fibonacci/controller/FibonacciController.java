@@ -67,7 +67,7 @@ public class FibonacciController {
         EmailFormaDto emailFormDto = new EmailFormaDto();
         emailFormDto.setSubject("Prueba Tecnica - David Gonzalez Plata");
         emailFormDto.setBody("Prueba de envio de email");
-        emailFormDto.setRecipients(new String[]{"dagopla@gmail.com"});
+        emailFormDto.setRecipients(new String[]{"dagopla18@gmail.com"});
         mailService.sendEmail(emailFormDto);
         return ResponseEntity.ok().body("Email enviado");
     }

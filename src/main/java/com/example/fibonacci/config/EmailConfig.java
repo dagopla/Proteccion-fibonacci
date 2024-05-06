@@ -12,30 +12,31 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 import java.util.Properties;
 
 @Configuration
+@PropertySource("classpath:email.properties")
 public class EmailConfig {
 
-    @Value("${spring.mail.username}")
+    @Value("${email.username}")
     private String email;
-    @Value("${spring.mail.password}")
+    @Value("${email.password}")
     private String password;
 
     private Properties getMailProperties() {
         Properties properties = new Properties();
         properties.put("mail.smtp.auth", "true");
         properties.put("mail.smtp.starttls.enable", "true");
-        properties.put("mail.smtp.host", "smtp.gmail.com");
+        properties.put("mail.smtp.host", "smtp-relay.gmail.com");
         properties.put("mail.smtp.port", "587");
         return properties;
     }
 
     @Bean
     public JavaMailSender javaMailSender() {
+        System.out.println(email);
+        System.out.println(password);
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
-        mailSender.setHost("smtp.gmail.com");
-        mailSender.setPort(587);
+        mailSender.setJavaMailProperties(getMailProperties());
         mailSender.setUsername(email);
         mailSender.setPassword(password);
-        mailSender.setJavaMailProperties(getMailProperties());
         return mailSender;
     }
     @Bean
