@@ -10,11 +10,15 @@ public class FibonacciServiceImpl implements FibonacciService {
 
     @Override
     public int[] fibonacci(int minutos, int segundos) {
+
+        String numeroComoString = "";
         if (minutos < 10) {
-            throw new IllegalArgumentException("El número de minutos debe ser mayor a 10, porfavor intente de nuevo en unos minutos.");
+             numeroComoString = String.valueOf(minutos)+"0";
+        }else{
+             numeroComoString = String.valueOf(minutos);
         }
+
         //Separa los minutos en dos terminos
-        String numeroComoString = String.valueOf(minutos);
         int[] terminos = new int[numeroComoString.length()];
         for (int i = 0; i < numeroComoString.length(); i++) {
             terminos[i] = Character.getNumericValue(numeroComoString.charAt(i));
@@ -23,9 +27,6 @@ public class FibonacciServiceImpl implements FibonacciService {
     }
 
     public int[] fibonacciSerie(int numeroTerminos, int terminoX, int terminoY) {
-        if (terminoX <= 0 || terminoY <= 0) {
-            throw new IllegalArgumentException("El número de los dos términos debe ser mayor a 0, porfavor intente de nuevo en unos minutos.");
-        }
         //Calcula la serie de fibonacci sin contar con los dos primeros terminos semilla
         int[] fibonacci = new int[numeroTerminos];
         fibonacci[0] = terminoY + terminoX;

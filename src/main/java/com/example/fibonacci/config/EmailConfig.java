@@ -24,15 +24,13 @@ public class EmailConfig {
         Properties properties = new Properties();
         properties.put("mail.smtp.auth", "true");
         properties.put("mail.smtp.starttls.enable", "true");
-        properties.put("mail.smtp.host", "smtp-relay.gmail.com");
+        properties.put("mail.smtp.host", "smtp.gmail.com");
         properties.put("mail.smtp.port", "587");
         return properties;
     }
 
     @Bean
     public JavaMailSender javaMailSender() {
-        System.out.println(email);
-        System.out.println(password);
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
         mailSender.setJavaMailProperties(getMailProperties());
         mailSender.setUsername(email);
