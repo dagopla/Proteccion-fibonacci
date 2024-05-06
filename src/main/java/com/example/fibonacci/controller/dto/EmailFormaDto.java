@@ -5,8 +5,6 @@ public class EmailFormaDto {
     private String body;
     private String subject;
 
-    private String archivo;
-
     public String[] getRecipients() {
         return recipients;
     }
@@ -31,11 +29,5 @@ public class EmailFormaDto {
         this.subject = subject;
     }
 
-    public String getArchivo() {
-        return archivo;
-    }
 
-    public void setArchivo(String archivo) {
-        this.archivo = archivo;
-    }
 }
