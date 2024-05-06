@@ -1,0 +1,13 @@
+version: '3.9'
+
+services:
+  fibonacci:
+    container_name: fibonacci
+    image: fibonacci-img
+    ports:
+      - "8002:8002"
+    networks:
+        - fibonacci-net
+networks:
+    fibonacci-net:
+       name: fibonacci-net

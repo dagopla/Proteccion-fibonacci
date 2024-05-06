@@ -31,9 +31,12 @@ public class FibonacciController {
             response.put("date", date);
             response.put("Semillas", date.getMinute());
             response.put("Numero de terminos", date.getSecond());
-            EmailFormaDto emailFormDto = createMail(fibonacci);
-            mailService.sendEmail(emailFormDto);
-            response.put("email", "Emails enviados a: " + Arrays.toString(emailFormDto.getRecipients()));
+            try {
+                EmailFormaDto emailFormDto = sendMail(fibonacci);
+                response.put("email", "Emails enviados a: " + Arrays.toString(emailFormDto.getRecipients()));
+            } catch (Exception e) {
+                response.put("email", "Error al enviar email");
+            }
             return ResponseEntity.ok().body(response);
         } catch (Exception e) {
             if (e instanceof IllegalArgumentException) {
@@ -51,12 +54,22 @@ public class FibonacciController {
 
 
     }
-    private EmailFormaDto createMail(int[] fibonacci){
+    private EmailFormaDto sendMail(int[] fibonacci){
         EmailFormaDto emailFormDto = new EmailFormaDto();
-        emailFormDto.setSubject("Fibonacci");
+        emailFormDto.setSubject("Prueba Tecnica - David Gonzalez Plata");
         emailFormDto.setBody(Arrays.toString(fibonacci));
-        emailFormDto.setRecipients(new String[]{"dagopla@gmail.com"});
+        emailFormDto.setRecipients(new String[]{"didier.correa@proteccion.com.co","correalondon@gmail.com","dagopla@gmail.com"});
+        mailService.sendEmail(emailFormDto);
         return emailFormDto;
+    }
+    @GetMapping("/emailTest")
+    public ResponseEntity<?> emailTest() {
+        EmailFormaDto emailFormDto = new EmailFormaDto();
+        emailFormDto.setSubject("Prueba Tecnica - David Gonzalez Plata");
+        emailFormDto.setBody("Prueba de envio de email");
+        emailFormDto.setRecipients(new String[]{"dagopla@gmail.com"});
+        mailService.sendEmail(emailFormDto);
+        return ResponseEntity.ok().body("Email enviado");
     }
 
 }
