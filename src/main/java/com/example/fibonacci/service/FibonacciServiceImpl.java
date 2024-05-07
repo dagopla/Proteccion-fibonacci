@@ -27,6 +27,9 @@ public class FibonacciServiceImpl implements FibonacciService {
     }
 
     public int[] fibonacciSerie(int numeroTerminos, int terminoX, int terminoY) {
+        if(terminoX == 0 && terminoY == 0){
+            throw new IllegalArgumentException("Los terminos semilla no pueden ser 0");
+        }
         //Calcula la serie de fibonacci sin contar con los dos primeros terminos semilla
         int[] fibonacci = new int[numeroTerminos];
         fibonacci[0] = terminoY + terminoX;
